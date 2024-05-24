@@ -9,7 +9,7 @@ class PredictView(APIView):
     permission_classes = [AllowAny]  # Allow this endpoint even withut logged in user
     
     def get(self, request):
-        data = {'message': 'Hello, get world!'}
+        data = {'message': 'Hello, get world!'} # test
         return Response(data)
     
     def post(self,request):
