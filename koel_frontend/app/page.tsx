@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
 
     try {
       setUploading(true);
-      const response = await fetch('http://127.0.0.1:8000/api/predict', {
+      const response = await fetch('http://127.0.0.1:8000/api/predict_audio', {
             method: 'POST',
             body: formData,
       });

@@ -13,7 +13,19 @@ from ultralytics import YOLO
 
 # Create your views here.
 
-class PredictView(APIView): 
+class PredictAudioView(APIView): 
+    permission_classes = [AllowAny]  # Allow this endpoint even withut logged in user
+    parser_classes = (MultiPartParser, FormParser)
+    
+    def get(self, request):
+        data = {'message': 'Hello, get world!'} # test
+        return Response(data)
+    
+    def post(self,request): 
+        data = {'message': 'audio detection'}
+        return Response(data)
+
+class PredictImageView(APIView): 
     permission_classes = [AllowAny]  # Allow this endpoint even withut logged in user
     parser_classes = (MultiPartParser, FormParser)
     
@@ -22,10 +34,6 @@ class PredictView(APIView):
         return Response(data)
     
     def post(self,request):
-        # p=Prediction()
-        # response_dict=p.predict(request)
-        # response_data=response_dict['response']
-
         '''Later to be abstracted away'''
         # passing image to model trial
         if 'image' not in request.FILES:
@@ -47,8 +55,8 @@ class PredictView(APIView):
                 keypoints = result.keypoints  # Keypoints object for pose outputs
                 probs = result.probs  # Probs object for classification outputs
                 obb = result.obb  # Oriented boxes object for OBB outputs
-                result.show()
-                # result.save(filename="result.jpeg")  # save to disk
+                # result.show()
+                result.save(filename="./ml/services/output/result.jpeg")  # save to disk
             
             data = {'message': 'Image detection complete'}
 
