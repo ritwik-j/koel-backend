@@ -13,7 +13,9 @@ import io
 from io import StringIO
 from io import BytesIO
 import pydub
+import os
 
+from opensoundscape.audio import Audio
 from opensoundscape.metrics import predict_multi_target_labels
 from opensoundscape.metrics import predict_single_target_labels
 from ultralytics import YOLO
@@ -49,32 +51,59 @@ class PredictAudioView(APIView):
             return Response({'error': 'No audio uploaded'}, status=status.HTTP_400_BAD_REQUEST)
         
         audio_file = request.FILES['audio']  # This is an instance of MIME (in-memory object)
-        
+
         try: 
-            audio_data = io.BytesIO(audio_file.read())  # Read the file into a BytesIO object
+            # Save the file temporarily
+            temp_file_path = os.path.join('/tmp', audio_file.name)
+            with open(temp_file_path, 'wb') as f:
+                f.write(audio_file.read())
+            
+            print(temp_file_path)
+            
+            # Load the audio file using OpenSoundscape
+            # audio = Audio.from_file(temp_file_path)
 
-            # Use librosa to load the audio from the BytesIO object
-            audio, sr = librosa.load(audio_data, sr=None)
-            audio_mp3 = convert_to_mp3(audio, sr)
-            data = {'message': 'read audio to librosa'}
-
-            model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   # load model
-            data = {'message': 'next- predict'}
-
-            predictions = model.predict([audio_mp3]) # predict on the model's classes
-
+            # load model
+            model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   
+            # Make predictions
+            predictions = model.predict([temp_file_path])
             print(predictions)
-
-            # scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions to confirm positive detections using threshold
-            # data = {'message': 'scores thingy'}
-            # scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
-            # # print(scores.head()) # for testing
-            # csv_file = StringIO()
-            # scores.to_csv(csv_file, sep=',') # convert to a csv file to save
-                        
+            
+            # Clean up - delete the temporary file
+            # os.remove(temp_file_path)
+            
+            # data = {'predictions': predictions}
+            data = {'predictions': 'hi'}
+        
         except Exception as e:
-            data = {'message': 'Image detection failed'}
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+        # try: 
+        #     audio_data = io.BytesIO(audio_file.read())  # Read the file into a BytesIO object
+
+        #     # Use librosa to load the audio from the BytesIO object
+        #     audio, sr = librosa.load(audio_data, sr=None)
+        #     audio_mp3 = convert_to_mp3(audio, sr)
+        #     data = {'message': 'read audio to librosa'}
+
+        #     model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   # load model
+        #     data = {'message': 'next- predict'}
+
+        #     # predictions = model.predict([audio_mp3]) # predict on the model's classes
+
+        #     # print(predictions)
+
+        #     # scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions to confirm positive detections using threshold
+        #     # data = {'message': 'scores thingy'}
+        #     # scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
+        #     # # print(scores.head()) # for testing
+        #     # csv_file = StringIO()
+        #     # scores.to_csv(csv_file, sep=',') # convert to a csv file to save
+                        
+        # except Exception as e:
+        #     data = {'message': 'Image detection failed'}
+        #     return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         # Get CSV content
         # csv_content = csv_file.getvalue()
