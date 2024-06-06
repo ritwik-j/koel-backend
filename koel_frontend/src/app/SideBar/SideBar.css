@@ -1,0 +1,131 @@
+.sidebar{
+    width: 21rem;
+    height: 100%;
+    position: fixed;
+    z-index: 99;
+  
+  
+  
+  
+    /* background-color: rgb(0, 5, 32); */
+    background-color: rgb(24, 24, 24);
+    padding: 1rem;
+    padding-top: 0.8rem;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    /* background: linear-gradient(to bottom, rgb(3, 25, 59) 80px, rgb(5, 14, 63) 80px); */
+    background: linear-gradient(to bottom, rgb(1, 97, 9) 80px, rgb(212, 244, 214) 80px);
+  
+  }
+  
+  .sidebar2{
+    width: 6rem;
+    height: 100%;
+  
+  
+  }
+  
+  .HamburgerBackground {
+    
+  
+    /* padding-top: 10px; */
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction:row;
+    align-items: left;
+    /* justify-content: center; */
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .HamburgerIcon {
+    width: 30px;
+  
+  }
+  
+  .sidebar_top {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  
+  .sidebar_logo {
+    width: 3.4rem;
+    height: 3.5rem;
+    object-fit: cover;
+  
+  
+  }
+  
+  .sidebar_list {
+    padding-top: 1rem;
+  }
+  
+  .sidebar_link {  
+    display: inline-block;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.8rem 1rem;
+    display: flex;
+    background-color: rgb(1, 97, 9);
+    margin-bottom: 1rem;
+    border-radius: 0.8rem;
+  }
+  
+  .sidebar_link:hover {
+  
+    background-color: #06379a;
+  }
+  
+  .sidebar_icon {
+    font-size: 1.2rem;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  
+  .sidebar_name{
+    margin-left: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    white-space: nowrap;
+    overflow: hidden;
+  
+  
+    font-size: 18px;
+  
+    font-family: 'Work Sans'
+    
+  }
+  
+  .sidebar_icon_sub{
+    width: 2rem
+  }
+  
+  .sidebar[data-collapse="true"] {
+    width: 6rem;
+  }
+  
+  .sidebar[data-collapse="true"] .sidebar_name {
+    display: none; /* Initial display value, adjust as needed */
+    
+  }
+  
+  .sidebar2[data-collapse="true"] {
+    width: 6rem;
+  }
+  
+  .sidebar2[data-collapse="true"] .sidebar_name {
+    display: none; /* Initial display value, adjust as needed */
+    
+  }
+  
+  .dashboardMain_icon{
+    width: 4rem
+  }

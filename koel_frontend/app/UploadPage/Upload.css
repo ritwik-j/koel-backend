@@ -1,0 +1,80 @@
+.FileExplorer{
+    margin-top: 20px;
+
+}
+
+.button {
+    background-color: #00812f; /* Tailwind's green-500 */
+    color: white;
+    padding-left: 1rem; /* Tailwind's px-4 equivalent */
+    padding-right: 1rem; /* Tailwind's px-4 equivalent */
+    padding-top: 0.5rem; /* Tailwind's py-2 equivalent */
+    padding-bottom: 0.5rem; /* Tailwind's py-2 equivalent */
+    border-radius: 0.25rem; /* Tailwind's rounded equivalent */
+    margin: 5px;
+  }
+
+.SearchForm{
+
+    height:40px;
+    flex:1;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 10px;
+    border-style: solid;
+    border: rgba(255,255,255,1);
+    border-width: 2px;
+    box-shadow: inset 0px 0px 5px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin-right: 20px;
+    
+   
+  
+  
+  }
+  
+
+
+
+.SearchBar{
+
+
+    background:transparent;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    border: 0px; 
+    height: 40px;
+    outline:none;
+    padding: 5px 10px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202020;
+    cursor: text; 
+    overflow: hidden;
+  
+  }
+
+
+  .AudioPlayer {
+    display: flex;           /* Use flexbox for centering */
+    flex-direction: column;  /* Arrange children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center;     /* Center children horizontally */
+    margin-top: 40px;        /* Add top margin */
+  }
+
+
+  .button_search {
+    background-color: #00812f; /* Tailwind's green-500 */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.25rem;
+    margin: 5px;
+  }
+
+
+  .search_logo {
+    width: 32px;
+    height: 32px;
+    margin: 4px;
+
+  }

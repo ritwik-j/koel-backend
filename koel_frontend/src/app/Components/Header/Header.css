@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap");
+
+.HeaderSection {
+  width: 100%;
+  background-color: rgb(1, 97, 9);
+  margin-left: 6rem;
+
+  color: white;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+
+  position: fixed;
+  z-index: 100;
+}
+.HeaderSection {
+  height: 80px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.HeaderLeft {
+  /* background-color: pink; */
+  
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: "Arial";
+}
+
+
+
+.PageHeader{
+    Height :50px;
+    font-size: 30px;
+    display: flex;
+    flex-direction:row;
+    align-items: center; 
+    font-family: 'Work Sans', Arial;
+  
+  }
