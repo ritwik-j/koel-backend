@@ -38,26 +38,15 @@ class PredictAudioView(APIView):
             audio_data = io.BytesIO(audio_file.read())  # Read the file into a BytesIO object
 
             # Use librosa to load the audio from the BytesIO object
-            y, sr = librosa.load(audio_data, sr=None)
+            audio, sr = librosa.load(audio_data, sr=None)
+            model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   # load model
+            predictions = model.predict([audio]) # predict on the model's classes
 
-            # Example: Print the sample rate and duration of the audio
-            duration = librosa.get_duration(y=y, sr=sr)
-            print(f"Sample rate: {sr}, Audio duration: {duration}s")
-
-            # Here you can add code to process the audio with your model
-            # For example: results = your_model(y, sr)
-
-            data = {'message': 'Audio stored and processed'}
-
-            # audio, sr = librosa.load(io.BytesIO(audio_file), sr=None) # Read audio file using librosa
-            # model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   # load model
-            # predictions = model.predict([audio]) # predict on the model's classes
-
-            # scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions to confirm positive detections using threshold
-            # scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
-            # # print(scores.head()) # for testing
-            # csv_file = StringIO()
-            # scores.to_csv(csv_file, sep=',') # convert to a csv file to save
+            scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions to confirm positive detections using threshold
+            scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
+            # print(scores.head()) # for testing
+            csv_file = StringIO()
+            scores.to_csv(csv_file, sep=',') # convert to a csv file to save
                         
         except Exception as e:
             data = {'message': 'Image detection failed'}
