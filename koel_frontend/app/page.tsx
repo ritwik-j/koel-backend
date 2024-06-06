@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
     if (!selectedFile) return;
 
     const formData = new FormData();
-    formData.append('image', selectedFile);
+    formData.append('audio', selectedFile);
 
     try {
       setUploading(true);
@@ -74,7 +74,7 @@ const HomePage: React.FC = () => {
         ))}
       </ul>
       <div>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <input type="file" accept="audio/*" onChange={handleFileChange} />
       <button onClick={handleUpload} disabled={uploading}>
         {uploading ? 'Detecting...' : 'Detect'}
       </button>
