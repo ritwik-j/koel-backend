@@ -30,23 +30,28 @@ class PredictAudioView(APIView):
         if 'audio' not in request.FILES:
             return Response({'error': 'No audio uploaded'}, status=status.HTTP_400_BAD_REQUEST)
         
-        audio_file = request.FILES['audio']  # This is an instance of MIME
+        audio_file = request.FILES['audio']  # This is an instance of MIME (in-memory object)
         
-        # audio detection function
         try: 
-            # Read audio file into an in-memory object
             audio_data = io.BytesIO(audio_file.read())  # Read the file into a BytesIO object
 
             # Use librosa to load the audio from the BytesIO object
             audio, sr = librosa.load(audio_data, sr=None)
-            model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   # load model
-            predictions = model.predict([audio]) # predict on the model's classes
+            data = {'message': 'read audio to librosa'}
 
-            scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions to confirm positive detections using threshold
-            scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
-            # print(scores.head()) # for testing
-            csv_file = StringIO()
-            scores.to_csv(csv_file, sep=',') # convert to a csv file to save
+            model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   # load model
+            data = {'message': 'next- predict'}
+
+            predictions = model.predict([audio_file]) # predict on the model's classes
+
+            print(predictions)
+
+            # scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions to confirm positive detections using threshold
+            # data = {'message': 'scores thingy'}
+            # scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
+            # # print(scores.head()) # for testing
+            # csv_file = StringIO()
+            # scores.to_csv(csv_file, sep=',') # convert to a csv file to save
                         
         except Exception as e:
             data = {'message': 'Image detection failed'}
@@ -61,32 +66,6 @@ class PredictAudioView(APIView):
         
         return Response(data)
         
-        
-        # if 'audio' not in request.FILES:
-        #     return Response({'error': 'No audio uploaded'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # audio_file = request.FILES['audio']  # This is an instance of mp3 (?)
-        
-        # try: 
-        #     # Read audio file into an in-memory object
-        #     audio_data = io.BytesIO(audio_file.read())  # Read the file into a BytesIO object
-
-        #     # Use librosa to load the audio from the BytesIO object
-        #     y, sr = librosa.load(audio_data, sr=None)
-
-        #     # Example: Print the sample rate and duration of the audio
-        #     duration = librosa.get_duration(y=y, sr=sr)
-        #     print(f"Sample rate: {sr}, Audio duration: {duration}s")
-
-        #     # Here you can add code to process the audio with your model
-        #     # For example: results = your_model(y, sr)
-
-        #     data = {'message': 'Audio stored and processed'}
-
-        # except Exception as e:
-        #     data = {'message': 'Image detection failed'}
-        #     return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        # return Response(data)
 
 class PredictImageView(APIView): 
     permission_classes = [AllowAny]  # Allow this endpoint even withut logged in user
