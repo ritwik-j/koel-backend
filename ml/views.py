@@ -11,6 +11,8 @@ import torch
 import librosa
 import io
 from io import StringIO
+from io import BytesIO
+import pydub
 
 from opensoundscape.metrics import predict_multi_target_labels
 from opensoundscape.metrics import predict_single_target_labels
@@ -18,10 +20,26 @@ from ultralytics import YOLO
 
 # Create your views here.
 
+def convert_to_mp3(y, sr):
+        # Convert the audio time series to a pydub AudioSegment
+        audio = pydub.AudioSegment(
+            y.tobytes(), 
+            frame_rate=sr,
+            sample_width=y.dtype.itemsize, 
+            channels=1  # Assuming mono; set to 2 for stereo
+        )
+
+        # Export the AudioSegment to an MP3 bytes buffer
+        mp3_buffer = BytesIO()
+        audio.export(mp3_buffer, format="mp3")
+        mp3_buffer.seek(0)
+        
+        return mp3_buffer
+
 class PredictAudioView(APIView): 
     permission_classes = [AllowAny]  # Allow this endpoint even withut logged in user
     parser_classes = (MultiPartParser, FormParser)
-    
+
     def get(self, request):
         data = {'message': 'Hello, get world!'} # test
         return Response(data)
@@ -37,12 +55,13 @@ class PredictAudioView(APIView):
 
             # Use librosa to load the audio from the BytesIO object
             audio, sr = librosa.load(audio_data, sr=None)
+            audio_mp3 = convert_to_mp3(audio, sr)
             data = {'message': 'read audio to librosa'}
 
             model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   # load model
             data = {'message': 'next- predict'}
 
-            predictions = model.predict([audio_file]) # predict on the model's classes
+            predictions = model.predict([audio_mp3]) # predict on the model's classes
 
             print(predictions)
 
