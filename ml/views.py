@@ -37,23 +37,24 @@ class PredictAudioView(APIView):
             
             # Make predictions
             predictions = model.predict([temp_file_path])
-            print(predictions)
+            # print(predictions)
             
             # Clean up - delete the temporary file
             os.remove(temp_file_path)
             
             # data = {'predictions': predictions}
 
-            scores = predictions(predictions, threshold=0.5) # get scores
+            scores = predictions(predictions, threshold=0.5) # get scores (np array)
             scores = scores.loc[:, (scores != 0).any(axis=0)] # drop columns with all zeros
             csv_file = BytesIO()
-            data = scores.to_csv(csv_file, sep=',')
+            scores.to_csv(csv_file, sep=',')
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         # Get CSV content
         csv_content = csv_file.getvalue()
+        print(csv_content, "hfirfo9828")
         
         # Create response with CSV content
         response = HttpResponse(content_type='text/csv')
