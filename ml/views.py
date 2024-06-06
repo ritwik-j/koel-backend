@@ -7,6 +7,9 @@ from rest_framework import status
 import numpy as np
 import torch
 import os
+from io import BytesIO
+import csv
+from django.http import HttpResponse
 
 # Create your views here
 class PredictAudioView(APIView): 
@@ -39,18 +42,27 @@ class PredictAudioView(APIView):
             # Clean up - delete the temporary file
             os.remove(temp_file_path)
             
-            data = {'predictions': predictions}
+            # data = {'predictions': predictions}
+
+            scores = predictions(predictions, threshold=0.5) # get scores
+            scores = scores.loc[:, (scores != 0).any(axis=0)] # drop columns with all zeros
+            csv_file = BytesIO()
+            data = scores.to_csv(csv_file, sep=',')
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         # Get CSV content
-        # csv_content = csv_file.getvalue()
+        csv_content = csv_file.getvalue()
         
         # Create response with CSV content
-        # response = Response(content=csv_content, media_type="text/csv")
-        # response.headers["Content-Disposition"] = "attachment; filename=sample.csv"
+        response = HttpResponse(content_type='text/csv')
+        response.headers["Content-Disposition"] = "attachment; filename=output.csv"
         
-        return Response(data)
+        writer = csv.writer(response)
+        for row in csv_content:
+            writer.writerow(row)
+
+        return response
         
 
