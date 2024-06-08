@@ -1,4 +1,10 @@
+.env.local
 # pycache
 __pycache__/
 
 *.pt
+*.jpg
+*.jpeg
+*.png
+
+*.tflite

@@ -4,56 +4,83 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
-from PIL import Image
-import numpy as np
-import cv2
 import torch
+import os
+from opensoundscape.metrics import predict_multi_target_labels
+from django.http import FileResponse
+from .apps import MlConfig
+import pandas as pd
+import os.path
 
-from ultralytics import YOLO
-
-# Create your views here.
-
-class PredictView(APIView): 
+# Create your views here
+class PredictAudioView(APIView): 
     permission_classes = [AllowAny]  # Allow this endpoint even withut logged in user
     parser_classes = (MultiPartParser, FormParser)
-    
+
     def get(self, request):
         data = {'message': 'Hello, get world!'} # test
         return Response(data)
     
-    def post(self,request):
-        # p=Prediction()
-        # response_dict=p.predict(request)
-        # response_data=response_dict['response']
-
-        '''Later to be abstracted away'''
-        # passing image to model trial
-        if 'image' not in request.FILES:
-            return Response({'error': 'No image uploaded'}, status=status.HTTP_400_BAD_REQUEST)
-
-        image_file = request.FILES['image']  # This is an instance of MIME
+    def post(self,request): 
+        '''to be abstracted away'''
+        if 'audio' not in request.FILES:
+            return Response({'error': 'No audio uploaded'}, status=status.HTTP_400_BAD_REQUEST)
         
-        try: 
-            image = Image.open(image_file) # Use PIL to open image
-            image_np = np.array(image)  # Convert PIL to np array. 
-            image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
-            model = YOLO("yolov8n.pt")  # pretrained YOLOv8n model
-            results = model(image_bgr) # np array is a valid source for model. check np shape (640,640,3)
+        audio_file = request.FILES['audio']  # This is an instance of MIME (in-memory object)
 
-            # Process results list
-            for result in results:
-                boxes = result.boxes  # Boxes object for bounding box outputs
-                masks = result.masks  # Masks object for segmentation masks outputs
-                keypoints = result.keypoints  # Keypoints object for pose outputs
-                probs = result.probs  # Probs object for classification outputs
-                obb = result.obb  # Oriented boxes object for OBB outputs
-                result.show()
-                # result.save(filename="result.jpeg")  # save to disk
+        try: 
+            # Save audio file temporarily
+            temp_file_path = os.path.join(os.getcwd(), '\\tmp', audio_file.name)
+            os.makedirs(os.path.dirname(temp_file_path), exist_ok=True)
+            with open(temp_file_path, 'wb') as f:
+                f.write(audio_file.read())
+
+            print(temp_file_path)
+
+            # load pretrained model
+            model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   
             
-            data = {'message': 'Image detection complete'}
+            # Make predictions
+            predictions = MlConfig.model.predict([temp_file_path])
+            
+            # Clean up temp folder
+            os.remove(temp_file_path)
+
+            scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions above thresh value
+            scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
+
+            # print("nfnrifnri , ", type(scores), scores.columns, scores)
+
+            # csv code
+            # csv_file = BytesIO()
+            scores_df = pd.DataFrame(scores)
+            scores_df.to_csv('csv_outputs.csv', sep=',')
+
+            data = {'scores': scores}
 
         except Exception as e:
-            data = {'message': 'Image detection failed'}
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-                
+
+        # return Response(data)
         return Response(data)
+
+class PredictWithCsvView(APIView): 
+    permission_classes = [AllowAny]  # Allow this endpoint even withut logged in user
+    parser_classes = (MultiPartParser, FormParser)
+
+    def get(self, request):
+        data = {'message': 'Hello, get world!'} # test
+        return Response(data)
+    
+    def post(self,request): 
+        
+        try: 
+            # Save audio file temporarily
+           os.path.isfile('csv_outputs.csv')
+
+
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        # return Response(data)
+        return FileResponse(open('csv_outputs.csv', 'rb'), as_attachment=True)

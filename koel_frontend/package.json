@@ -9,12 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mapbox-gl": "^3.4.0",
+    "next": "^14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-map-gl": "^7.1.7",
+    "sass": "^1.77.2",
+    "tailwind": "^4.0.0"
+  },
+  "devDependencies": {
     "js-cookie": "^3.0.5",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
+    "react-dom": "^18",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
