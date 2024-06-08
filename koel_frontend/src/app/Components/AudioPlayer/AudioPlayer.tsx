@@ -31,6 +31,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
 
   return (
     <div className="audio-player">
+      <div className='text-2xl font-bold'>
+        Audio Recording of Animal
+      </div>
       <audio
         controls
         ref={audioRef}
@@ -46,7 +49,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
         {/* <button onClick={togglePlay}>
           {isPlaying ? 'Pause' : 'Play'}
         </button> */}
-        <div className="time">{currentTime.toFixed(1)} seconds</div>
+        <div className="time font-bold">{currentTime.toFixed(1)} seconds</div>
       </div>
     </div>
   );

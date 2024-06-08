@@ -8,6 +8,7 @@ import "./Upload.css"
 import AudioPlayer from '@/app/Components/AudioPlayer/AudioPlayer';
 import SearchIcon from "@/app/Icons/search-icon.svg"
 import Image from 'next/image';
+import AniSpecies from '@/app/Components/AniSpecies/AniSpecies';
 
 
 const UploadPage: React.FC = () => {
@@ -18,6 +19,9 @@ const UploadPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [fetchedImg, setFetchedImg] = useState(null);
+  const [uploadComplete, setUploadComplete] = useState(false);
+
+  const animalspec  = {"Straw-Headed BulBul":{0:1,1:1,2:0,3:0,4:1,5:1},"Koel":{0:0,1:0,2:0,3:0,4:1,5:0},"Pigeon":{0:1,1:0,2:0,3:0,4:0,5:0}}
 
   const handleFileChange = (event:any) => {
     const file = event.target.files[0];
@@ -31,6 +35,8 @@ const UploadPage: React.FC = () => {
 
     const formData = new FormData();
     formData.append('audio', selectedFile);
+    
+    setUploadComplete(true);
 
     try {
       setUploading(true);
@@ -41,7 +47,9 @@ const UploadPage: React.FC = () => {
   
       const data = await response.json();
       console.log('response data:', data);
-      
+
+      setUploadComplete(true);
+
       return data;
 
     } catch (error) {
@@ -105,9 +113,17 @@ const UploadPage: React.FC = () => {
         </div>
 
         <div className='AudioPlayer'>
-          Sound Stuff
+          <div>
+          
 
           {selectedFile && <AudioPlayer audioUrl={URL.createObjectURL(selectedFile)} />}
+
+          </div>
+
+
+          <div>
+            {uploadComplete && <AniSpecies animalspec={animalspec} />}
+          </div>
         </div>
         </div>
       </BaseLayout>
