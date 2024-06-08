@@ -10,8 +10,9 @@ import os
 from io import BytesIO
 import csv
 from opensoundscape.metrics import predict_multi_target_labels
-# from django.http import HttpResponse
-from django.http import FileResponse
+from opensoundscape.metrics import predict_single_target_labels
+from tempfile import NamedTemporaryFile
+from .apps import MlConfig
 import pandas as pd
 import os.path
 
@@ -33,15 +34,18 @@ class PredictAudioView(APIView):
 
         try: 
             # Save audio file temporarily
-            temp_file_path = os.path.join('/tmp', audio_file.name)
+            temp_file_path = os.path.join(os.getcwd(), '\\tmp', audio_file.name)
+            os.makedirs(os.path.dirname(temp_file_path), exist_ok=True)
             with open(temp_file_path, 'wb') as f:
                 f.write(audio_file.read())
-        
+
+            print(temp_file_path)
+
             # load pretrained model
             model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   
             
             # Make predictions
-            predictions = model.predict([temp_file_path])
+            predictions = MlConfig.model.predict([temp_file_path])
             
             # Clean up temp folder
             os.remove(temp_file_path)
