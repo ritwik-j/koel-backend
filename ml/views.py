@@ -11,6 +11,7 @@ from io import BytesIO
 import csv
 from opensoundscape.metrics import predict_multi_target_labels
 from opensoundscape.metrics import predict_single_target_labels
+import pandas as pd
 
 # Create your views here
 class PredictAudioView(APIView): 
@@ -51,9 +52,10 @@ class PredictAudioView(APIView):
 
             # csv code
             # csv_file = BytesIO()
-            # scores.to_csv(csv_file, sep=',')
+            scores_df = pd.DataFrame(scores)
+            scores_df.to_csv('csv_outputs.csv', sep=',')
 
-            # Get CSV content
+            # # Get CSV content
             # csv_content = csv_file.getvalue()
             # print(csv_content, "hfirfo9828")
         
