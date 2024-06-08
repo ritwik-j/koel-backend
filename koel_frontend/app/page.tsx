@@ -140,4 +140,13 @@ const HomePage: React.FC = () => {
   );
 };
 
+/*
+
+  TODO:
+  1. Check what happens without csv
+  2. Delete the csv after download
+  3. Grey out the download button before detection is run (front end)
+
+*/ 
+
 export default HomePage;

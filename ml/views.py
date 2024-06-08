@@ -4,14 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
-import numpy as np
 import torch
 import os
-from io import BytesIO
-import csv
 from opensoundscape.metrics import predict_multi_target_labels
-from opensoundscape.metrics import predict_single_target_labels
-from tempfile import NamedTemporaryFile
+from django.http import FileResponse
 from .apps import MlConfig
 import pandas as pd
 import os.path
