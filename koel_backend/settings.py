@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-4r4o!5hxw-li1*@gug@mm=b5ce!my+*ud3^hr2mcwhn-l-piy=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'animals',
     'accounts',
+    'ml',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -54,7 +55,17 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False  # Ensure this is False
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # Add the origin of your frontend
+]
+
+# CSRF_USE_SESSIONS = True
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:3000',  # Add the origin of your frontend
+# ]
 
 ROOT_URLCONF = "koel_backend.urls"
 
