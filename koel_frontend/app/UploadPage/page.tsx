@@ -20,8 +20,9 @@ const UploadPage: React.FC = () => {
   const [uploading, setUploading] = useState(false);
   const [fetchedImg, setFetchedImg] = useState(null);
   const [uploadComplete, setUploadComplete] = useState(false);
+  const [animalSpec, setanimalSpec] = useState({});
 
-  const animalspec  = {"Straw-Headed BulBul":{0:1,1:1,2:0,3:0,4:1,5:1},"Koel":{0:0,1:0,2:0,3:0,4:1,5:0},"Pigeon":{0:1,1:0,2:0,3:0,4:0,5:0}}
+  // const animalspec  = {"Straw-Headed BulBul":{0:1,1:1,2:0,3:0,4:1,5:1},"Koel":{0:0,1:0,2:0,3:0,4:1,5:0},"Pigeon":{0:1,1:0,2:0,3:0,4:0,5:0}}
 
   const handleFileChange = (event:any) => {
     const file = event.target.files[0];
@@ -36,7 +37,7 @@ const UploadPage: React.FC = () => {
     const formData = new FormData();
     formData.append('audio', selectedFile);
     
-    setUploadComplete(true);
+    // setUploadComplete(true);
 
     try {
       setUploading(true);
@@ -47,6 +48,7 @@ const UploadPage: React.FC = () => {
   
       const data = await response.json();
       console.log('response data:', data);
+      setanimalSpec(data.scores)
 
       setUploadComplete(true);
 
@@ -61,17 +63,46 @@ const UploadPage: React.FC = () => {
     }
   };  
 
+  const handleDownload = async () => {
+    setLoading(true);
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/predict_with_csv', {
+            method: 'POST',
+        });
 
+        const blob = await response.blob(); // Convert response to blob
+
+        // Create a URL for the blob object
+        const url = URL.createObjectURL(blob);
+
+        // Create a link element to trigger the download
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'csv_outputs.csv'; // Specify the filename here
+        document.body.appendChild(link);
+
+        // Click the link to start the download
+        link.click();
+
+        // Clean up
+        URL.revokeObjectURL(url);
+
+        return;
+
+    } catch (error) {
+        console.error('Error detecting:', error);
+        return [];
+
+    } finally {
+        setLoading(false);
+    }
+  };
 
   const handleSearch = () => {
     // Implement upload functionality here
     console.log('Search button clicked');
   };
 
-  const handleDownload = () => {
-    // Implement download functionality here
-    console.log('Download button clicked');
-  };
 
 
 
@@ -122,7 +153,7 @@ const UploadPage: React.FC = () => {
 
 
           <div>
-            {uploadComplete && <AniSpecies animalspec={animalspec} />}
+            {uploadComplete && <AniSpecies animalspec={animalSpec} />}
           </div>
         </div>
         </div>

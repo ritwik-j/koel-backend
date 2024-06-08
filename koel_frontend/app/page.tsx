@@ -55,26 +55,6 @@ const HomePage: React.FC = () => {
     }
   };
 
-  // const handleDownload = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch('http://127.0.0.1:8000/api/predict_with_csv', {
-  //           method: 'POST',
-  //     });
-  
-  //     const data = await response.json();
-  //     console.log('response data:', data);
-      
-  //     return data;
-
-  //   } catch (error) {
-  //     console.error('Error detecting:', error);
-  //     return []
-
-  //   } finally {
-  //     setUploading(false);
-  //   }
-  // };
   const handleDownload = async () => {
     setLoading(true);
     try {
