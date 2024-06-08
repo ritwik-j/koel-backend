@@ -11,6 +11,8 @@ from io import BytesIO
 import csv
 from opensoundscape.metrics import predict_multi_target_labels
 from opensoundscape.metrics import predict_single_target_labels
+from tempfile import NamedTemporaryFile
+from .apps import MlConfig
 
 # Create your views here
 class PredictAudioView(APIView): 
@@ -30,15 +32,18 @@ class PredictAudioView(APIView):
 
         try: 
             # Save audio file temporarily
-            temp_file_path = os.path.join('/tmp', audio_file.name)
+            temp_file_path = os.path.join(os.getcwd(), '\\tmp', audio_file.name)
+            os.makedirs(os.path.dirname(temp_file_path), exist_ok=True)
             with open(temp_file_path, 'wb') as f:
                 f.write(audio_file.read())
-        
+
+            print(temp_file_path)
+
             # load pretrained model
             model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   
             
             # Make predictions
-            predictions = model.predict([temp_file_path])
+            predictions = MlConfig.model.predict([temp_file_path])
             
             # Clean up temp folder
             os.remove(temp_file_path)
@@ -48,14 +53,6 @@ class PredictAudioView(APIView):
 
             # print("nfnrifnri , ", type(scores), scores.columns, scores)
             data = {'scores': scores}
-
-            # csv code
-            # csv_file = BytesIO()
-            # scores.to_csv(csv_file, sep=',')
-
-            # Get CSV content
-            # csv_content = csv_file.getvalue()
-            # print(csv_content, "hfirfo9828")
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
