@@ -35,12 +35,9 @@ class PredictAudioView(APIView):
             with open(temp_file_path, 'wb') as f:
                 f.write(audio_file.read())
 
-            print(temp_file_path)
+            # print(temp_file_path)
 
-            # load pretrained model
-            model = torch.hub.load('kitzeslab/bioacoustics-model-zoo', 'BirdNET',trust_repo=True)   
-            
-            # Make predictions
+            # Load from MLconfig and make predictions
             predictions = MlConfig.model.predict([temp_file_path])
             
             # Clean up temp folder
