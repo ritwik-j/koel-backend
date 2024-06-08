@@ -13,6 +13,7 @@ from opensoundscape.metrics import predict_multi_target_labels
 from opensoundscape.metrics import predict_single_target_labels
 from tempfile import NamedTemporaryFile
 from .apps import MlConfig
+import pandas as pd
 
 # Create your views here
 class PredictAudioView(APIView): 
@@ -53,6 +54,15 @@ class PredictAudioView(APIView):
 
             # print("nfnrifnri , ", type(scores), scores.columns, scores)
             data = {'scores': scores}
+
+            # csv code
+            # csv_file = BytesIO()
+            scores_df = pd.DataFrame(scores)
+            scores_df.to_csv('csv_outputs.csv', sep=',')
+
+            # # Get CSV content
+            # csv_content = csv_file.getvalue()
+            # print(csv_content, "hfirfo9828")
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
