@@ -1,0 +1,343 @@
+Start (s),End (s),Scientific name,Common name,Confidence
+0,3.0,Aplonis panayensis,Asian Glossy Starling,0.1057
+18.0,21.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1076
+27.0,30.0,Human vocal,Human vocal,0.2179
+30.0,33.0,Human vocal,Human vocal,0.1062
+36.0,39.0,Phylloscopus borealis,Arctic Warbler,0.1879
+36.0,39.0,Phylloscopus borealis,Arctic Warbler,0.1285
+39.0,42.0,Human vocal,Human vocal,0.2809
+42.0,45.0,Acrocephalus australis,Australian Reed Warbler,0.1719
+45.0,48.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.8202
+45.0,48.0,Pycnonotus plumosus,Olive-winged Bulbul,0.2118
+45.0,48.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.1134
+45.0,48.0,Pycnonotus luteolus,White-browed Bulbul,0.1107
+45.0,48.0,Pycnonotus barbatus,Common Bulbul,0.1013
+48.0,51.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.2769
+60.0,63.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1534
+63.0,66.0,Aplonis panayensis,Asian Glossy Starling,0.2194
+63.0,66.0,Pandion haliaetus,Osprey,0.1380
+66.0,69.0,Pycnonotus plumosus,Olive-winged Bulbul,0.1371
+72.0,75.0,Tyrannus tyrannus,Eastern Kingbird,0.2278
+72.0,75.0,Loriculus vernalis,Vernal Hanging-Parrot,0.1615
+72.0,75.0,Loriculus galgulus,Blue-crowned Hanging-Parrot,0.1276
+72.0,75.0,Cinnyris jugularis,Olive-backed Sunbird,0.1227
+75.0,78.0,Scolopax rusticola,Eurasian Woodcock,0.8285
+75.0,78.0,Aplonis panayensis,Asian Glossy Starling,0.1116
+78.0,81.0,Accipiter badius,Shikra,0.2635
+84.0,87.0,Aplonis panayensis,Asian Glossy Starling,0.1813
+87.0,90.0,Tyrannus tyrannus,Eastern Kingbird,0.2821
+90.0,93.0,Anthreptes malacensis,Brown-throated Sunbird,0.2205
+90.0,93.0,Cinnyris jugularis,Olive-backed Sunbird,0.1664
+90.0,93.0,Cinnyris lotenius,Loten's Sunbird,0.1109
+96.0,99.0,Aplonis panayensis,Asian Glossy Starling,0.1289
+102.0,105.0,Aplonis panayensis,Asian Glossy Starling,0.1947
+108.0,111.0,Zosterops simplex,Swinhoe's White-eye,0.2420
+108.0,111.0,Spinus tristis,American Goldfinch,0.2357
+111.0,114.0,Engine,Engine,0.1405
+114.0,117.0,Dog,Dog,0.2593
+114.0,117.0,Human vocal,Human vocal,0.1593
+117.0,120.0,Human vocal,Human vocal,0.2586
+120.0,123.0,Engine,Engine,0.1304
+126.0,129.0,Porzana porzana,Spotted Crake,0.3548
+126.0,129.0,Rallus aquaticus,Water Rail,0.1313
+129.0,132.0,Sayornis nigricans,Black Phoebe,0.8181
+132.0,135.0,Aplonis panayensis,Asian Glossy Starling,0.1427
+135.0,138.0,Cyornis tickelliae,Tickell's Blue Flycatcher,0.1628
+135.0,138.0,Helopsaltes certhiola,Pallas's Grasshopper Warbler,0.1060
+138.0,141.0,Aplonis panayensis,Asian Glossy Starling,0.3550
+138.0,141.0,Aplonis panayensis,Asian Glossy Starling,0.2284
+138.0,141.0,Psittacula longicauda,Long-tailed Parakeet,0.1078
+141.0,144.0,Psittacula longicauda,Long-tailed Parakeet,0.2546
+141.0,144.0,Psittacula longicauda,Long-tailed Parakeet,0.2306
+141.0,144.0,Aplonis panayensis,Asian Glossy Starling,0.1940
+144.0,147.0,Psittacula longicauda,Long-tailed Parakeet,0.5752
+144.0,147.0,Psittacula longicauda,Long-tailed Parakeet,0.3786
+144.0,147.0,Psittacula alexandri,Red-breasted Parakeet,0.3668
+147.0,150.0,Psittacula alexandri,Red-breasted Parakeet,0.6436
+147.0,150.0,Psittacula longicauda,Long-tailed Parakeet,0.1278
+147.0,150.0,Cyanocitta cristata,Blue Jay,0.1190
+147.0,150.0,Anthracoceros coronatus,Malabar Pied-Hornbill,0.1034
+150.0,153.0,Spinus pinus,Pine Siskin,0.8229
+156.0,159.0,Dendrocopos major,Great Spotted Woodpecker,0.5666
+159.0,162.0,Pernis ptilorhynchus,Crested Honey-buzzard,0.1193
+165.0,168.0,Spinus pinus,Pine Siskin,0.2295
+168.0,171.0,Anthreptes malacensis,Brown-throated Sunbird,0.1949
+168.0,171.0,Anthreptes malacensis,Brown-throated Sunbird,0.1226
+171.0,174.0,Anthreptes malacensis,Brown-throated Sunbird,0.4218
+171.0,174.0,Cinnyris jugularis,Olive-backed Sunbird,0.2615
+171.0,174.0,Hedydipna collaris,Collared Sunbird,0.1737
+171.0,174.0,Anthreptes malacensis,Brown-throated Sunbird,0.1297
+171.0,174.0,Leptocoma brasiliana,Van Hasselt's Sunbird,0.1082
+171.0,174.0,Cinnyris jugularis,Olive-backed Sunbird,0.1001
+174.0,177.0,Anthreptes malacensis,Brown-throated Sunbird,0.6118
+174.0,177.0,Hedydipna collaris,Collared Sunbird,0.3737
+174.0,177.0,Cinnyris jugularis,Olive-backed Sunbird,0.3712
+174.0,177.0,Cinnyris jugularis,Olive-backed Sunbird,0.1834
+174.0,177.0,Anthreptes malacensis,Brown-throated Sunbird,0.1701
+177.0,180.0,Anthreptes malacensis,Brown-throated Sunbird,0.5975
+180.0,183.0,Anthreptes malacensis,Brown-throated Sunbird,0.5662
+180.0,183.0,Cinnyris jugularis,Olive-backed Sunbird,0.1797
+180.0,183.0,Anthreptes malacensis,Brown-throated Sunbird,0.1771
+180.0,183.0,Leptocoma brasiliana,Van Hasselt's Sunbird,0.1189
+183.0,186.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1512
+186.0,189.0,Cinnyris jugularis,Olive-backed Sunbird,0.2741
+186.0,189.0,Anthreptes malacensis,Brown-throated Sunbird,0.1764
+186.0,189.0,Cinnyris jugularis,Olive-backed Sunbird,0.1535
+186.0,189.0,Anthreptes malacensis,Brown-throated Sunbird,0.1352
+189.0,192.0,Spinus pinus,Pine Siskin,0.1267
+192.0,195.0,Cinnyris jugularis,Olive-backed Sunbird,0.2939
+192.0,195.0,Anthreptes malacensis,Brown-throated Sunbird,0.1537
+192.0,195.0,Cinnyris jugularis,Olive-backed Sunbird,0.1211
+195.0,198.0,Anthreptes malacensis,Brown-throated Sunbird,0.2638
+195.0,198.0,Cinnyris jugularis,Olive-backed Sunbird,0.2172
+195.0,198.0,Anthreptes malacensis,Brown-throated Sunbird,0.2086
+195.0,198.0,Cinnyris jugularis,Olive-backed Sunbird,0.1465
+198.0,201.0,Cinnyris jugularis,Olive-backed Sunbird,0.1498
+198.0,201.0,Anthreptes malacensis,Brown-throated Sunbird,0.1201
+201.0,204.0,Anthreptes malacensis,Brown-throated Sunbird,0.3912
+201.0,204.0,Cinnyris jugularis,Olive-backed Sunbird,0.2730
+201.0,204.0,Cinnyris jugularis,Olive-backed Sunbird,0.1190
+204.0,207.0,Cinnyris lotenius,Loten's Sunbird,0.2705
+204.0,207.0,Cinnyris jugularis,Olive-backed Sunbird,0.1532
+210.0,213.0,Anthreptes malacensis,Brown-throated Sunbird,0.2363
+210.0,213.0,Cinnyris jugularis,Olive-backed Sunbird,0.1574
+210.0,213.0,Anthreptes malacensis,Brown-throated Sunbird,0.1551
+210.0,213.0,Cinnyris jugularis,Olive-backed Sunbird,0.1326
+216.0,219.0,Cinnyris jugularis,Olive-backed Sunbird,0.3620
+216.0,219.0,Cinnyris jugularis,Olive-backed Sunbird,0.1170
+216.0,219.0,Anthreptes malacensis,Brown-throated Sunbird,0.1078
+222.0,225.0,Human vocal,Human vocal,0.1893
+225.0,228.0,Pandion haliaetus,Osprey,0.3314
+225.0,228.0,Cinnyris jugularis,Olive-backed Sunbird,0.3135
+225.0,228.0,Anthreptes malacensis,Brown-throated Sunbird,0.2284
+225.0,228.0,Cinnyris jugularis,Olive-backed Sunbird,0.2199
+225.0,228.0,Anthreptes malacensis,Brown-throated Sunbird,0.1083
+228.0,231.0,Anthreptes malacensis,Brown-throated Sunbird,0.2145
+228.0,231.0,Passer domesticus,House Sparrow,0.2133
+231.0,234.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1766
+231.0,234.0,Aplonis panayensis,Asian Glossy Starling,0.1511
+231.0,234.0,Pandion haliaetus,Osprey,0.1029
+237.0,240.0,Anthreptes malacensis,Brown-throated Sunbird,0.2464
+237.0,240.0,Anthreptes malacensis,Brown-throated Sunbird,0.2282
+237.0,240.0,Cinnyris jugularis,Olive-backed Sunbird,0.2156
+237.0,240.0,Cinnyris jugularis,Olive-backed Sunbird,0.1949
+240.0,243.0,Cinnyris jugularis,Olive-backed Sunbird,0.2346
+240.0,243.0,Anthreptes malacensis,Brown-throated Sunbird,0.1429
+240.0,243.0,Anthreptes malacensis,Brown-throated Sunbird,0.1268
+243.0,246.0,Anthreptes malacensis,Brown-throated Sunbird,0.2271
+243.0,246.0,Cinnyris jugularis,Olive-backed Sunbird,0.1756
+243.0,246.0,Leptocoma brasiliana,Van Hasselt's Sunbird,0.1466
+246.0,249.0,Helopsaltes certhiola,Pallas's Grasshopper Warbler,0.1987
+249.0,252.0,Cinnyris jugularis,Olive-backed Sunbird,0.1050
+252.0,255.0,Cinnyris jugularis,Olive-backed Sunbird,0.2959
+252.0,255.0,Cinnyris jugularis,Olive-backed Sunbird,0.1750
+252.0,255.0,Anthreptes malacensis,Brown-throated Sunbird,0.1254
+258.0,261.0,Human vocal,Human vocal,0.3058
+261.0,264.0,Anthreptes malacensis,Brown-throated Sunbird,0.2432
+267.0,270.0,Engine,Engine,0.1689
+270.0,273.0,Anthreptes malacensis,Brown-throated Sunbird,0.3392
+270.0,273.0,Cinnyris jugularis,Olive-backed Sunbird,0.1693
+273.0,276.0,Human vocal,Human vocal,0.1827
+273.0,276.0,Engine,Engine,0.1712
+276.0,279.0,Spinus pinus,Pine Siskin,0.3052
+276.0,279.0,Human vocal,Human vocal,0.1523
+276.0,279.0,Cinnyris jugularis,Olive-backed Sunbird,0.1054
+279.0,282.0,Human vocal,Human vocal,0.3801
+279.0,282.0,Engine,Engine,0.1337
+282.0,285.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1842
+285.0,288.0,Sayornis nigricans,Black Phoebe,0.4993
+285.0,288.0,Human vocal,Human vocal,0.2377
+285.0,288.0,Cinnyris jugularis,Olive-backed Sunbird,0.1166
+285.0,288.0,Anthreptes malacensis,Brown-throated Sunbird,0.1013
+288.0,291.0,Human vocal,Human vocal,0.2440
+291.0,294.0,Human vocal,Human vocal,0.1610
+291.0,294.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1607
+294.0,297.0,Scolopax rusticola,Eurasian Woodcock,0.1733
+294.0,297.0,Human vocal,Human vocal,0.1725
+300.0,303.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.2597
+300.0,303.0,Human vocal,Human vocal,0.1398
+303.0,306.0,Human vocal,Human vocal,0.3262
+303.0,306.0,Dog,Dog,0.1628
+303.0,306.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1228
+306.0,309.0,Cinnyris jugularis,Olive-backed Sunbird,0.1733
+306.0,309.0,Mixornis gularis,Pin-striped Tit-Babbler,0.1350
+306.0,309.0,Anthreptes malacensis,Brown-throated Sunbird,0.1181
+309.0,312.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1704
+312.0,315.0,Anthreptes malacensis,Brown-throated Sunbird,0.1150
+315.0,318.0,Cacomantis merulinus,Plaintive Cuckoo,0.1150
+318.0,321.0,Aplonis panayensis,Asian Glossy Starling,0.1141
+321.0,324.0,Anthreptes malacensis,Brown-throated Sunbird,0.4608
+321.0,324.0,Cinnyris jugularis,Olive-backed Sunbird,0.2486
+321.0,324.0,Anthreptes malacensis,Brown-throated Sunbird,0.1454
+321.0,324.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1039
+324.0,327.0,Tyrannus tyrannus,Eastern Kingbird,0.1595
+324.0,327.0,Scolopax rusticola,Eurasian Woodcock,0.1366
+324.0,327.0,Phylloscopus borealis,Arctic Warbler,0.1264
+324.0,327.0,Loriculus galgulus,Blue-crowned Hanging-Parrot,0.1246
+327.0,330.0,Anthreptes malacensis,Brown-throated Sunbird,0.1742
+327.0,330.0,Tyrannus tyrannus,Eastern Kingbird,0.1152
+330.0,333.0,Rhipidura javanica,Malaysian Pied-Fantail,0.1101
+333.0,336.0,Anthreptes malacensis,Brown-throated Sunbird,0.2822
+333.0,336.0,Anthreptes malacensis,Brown-throated Sunbird,0.2282
+336.0,339.0,Anthreptes malacensis,Brown-throated Sunbird,0.1385
+336.0,339.0,Anthreptes malacensis,Brown-throated Sunbird,0.1229
+342.0,345.0,Cinnyris jugularis,Olive-backed Sunbird,0.2658
+342.0,345.0,Epinecrophylla fulviventris,Checker-throated Stipplethroat,0.2323
+342.0,345.0,Aplonis panayensis,Asian Glossy Starling,0.1086
+351.0,354.0,Anthreptes malacensis,Brown-throated Sunbird,0.1106
+354.0,357.0,Gallinula chloropus,Eurasian Moorhen,0.1489
+357.0,360.0,Sayornis nigricans,Black Phoebe,0.1922
+357.0,360.0,Anthreptes malacensis,Brown-throated Sunbird,0.1226
+360.0,363.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.1086
+363.0,366.0,Human vocal,Human vocal,0.1806
+366.0,369.0,Human vocal,Human vocal,0.2973
+369.0,372.0,Aethopyga siparaja,Crimson Sunbird,0.3288
+369.0,372.0,Pycnonotus plumosus,Olive-winged Bulbul,0.2765
+375.0,378.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1072
+375.0,378.0,Sturnella neglecta,Western Meadowlark,0.1013
+378.0,381.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1553
+378.0,381.0,Pycnonotus plumosus,Olive-winged Bulbul,0.1184
+381.0,384.0,Pernis ptilorhynchus,Crested Honey-buzzard,0.1459
+381.0,384.0,Anthreptes malacensis,Brown-throated Sunbird,0.1267
+381.0,384.0,Human vocal,Human vocal,0.1239
+381.0,384.0,Anthreptes malacensis,Brown-throated Sunbird,0.1022
+384.0,387.0,Serinus serinus,European Serin,0.1523
+390.0,393.0,Psilopogon lineatus,Lineated Barbet,0.5705
+390.0,393.0,Cinnyris jugularis,Olive-backed Sunbird,0.2352
+390.0,393.0,Serinus serinus,European Serin,0.1291
+390.0,393.0,Spinus pinus,Pine Siskin,0.1065
+393.0,396.0,Cinnyris jugularis,Olive-backed Sunbird,0.5770
+393.0,396.0,Anthreptes malacensis,Brown-throated Sunbird,0.3549
+396.0,399.0,Psilopogon lineatus,Lineated Barbet,0.3949
+396.0,399.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1426
+402.0,405.0,Buceros rhinoceros,Rhinoceros Hornbill,0.2654
+405.0,408.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.1932
+405.0,408.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1220
+405.0,408.0,Anthreptes malacensis,Brown-throated Sunbird,0.1025
+408.0,411.0,Cinnyris jugularis,Olive-backed Sunbird,0.1402
+408.0,411.0,Anthreptes malacensis,Brown-throated Sunbird,0.1007
+411.0,414.0,Gallus gallus,Red Junglefowl,0.4045
+414.0,417.0,Phylloscopus borealis,Arctic Warbler,0.5538
+414.0,417.0,Phylloscopus borealis,Arctic Warbler,0.3851
+414.0,417.0,Erithacus rubecula,European Robin,0.1169
+417.0,420.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1264
+420.0,423.0,Buceros rhinoceros,Rhinoceros Hornbill,0.6017
+426.0,429.0,Zosterops meyeni,Lowland White-eye,0.2247
+432.0,435.0,Cincloramphus timoriensis,Tawny Grassbird,0.3196
+432.0,435.0,Leptocoma brasiliana,Van Hasselt's Sunbird,0.1682
+432.0,435.0,Anthreptes malacensis,Brown-throated Sunbird,0.1005
+432.0,435.0,Psittinus cyanurus,Blue-rumped Parrot,0.1000
+435.0,438.0,Cincloramphus timoriensis,Tawny Grassbird,0.3071
+435.0,438.0,Phaenicophaeus sumatranus,Chestnut-bellied Malkoha,0.1520
+438.0,441.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.2640
+438.0,441.0,Rhipidura javanica,Malaysian Pied-Fantail,0.1815
+438.0,441.0,Vidua macroura,Pin-tailed Whydah,0.1422
+441.0,444.0,Linaria cannabina,Eurasian Linnet,0.1284
+444.0,447.0,Rhipidura javanica,Malaysian Pied-Fantail,0.1683
+444.0,447.0,Linaria cannabina,Eurasian Linnet,0.1188
+447.0,450.0,Orthotomus atrogularis,Dark-necked Tailorbird,0.1832
+447.0,450.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1389
+450.0,453.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1342
+453.0,456.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1448
+456.0,459.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.2282
+456.0,459.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.1275
+459.0,462.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.2323
+459.0,462.0,Phylloscopus borealis,Arctic Warbler,0.1706
+459.0,462.0,Cyanoderma erythropterum,Chestnut-winged Babbler,0.1329
+459.0,462.0,Phylloscopus borealis,Arctic Warbler,0.1023
+462.0,465.0,Phaenicophaeus sumatranus,Chestnut-bellied Malkoha,0.1659
+468.0,471.0,Psilopogon lineatus,Lineated Barbet,0.1473
+471.0,474.0,Anthreptes malacensis,Brown-throated Sunbird,0.1163
+474.0,477.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1191
+474.0,477.0,Gallinula chloropus,Eurasian Moorhen,0.1137
+474.0,477.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.1083
+474.0,477.0,Phaenicophaeus sumatranus,Chestnut-bellied Malkoha,0.1016
+477.0,480.0,Phaenicophaeus sumatranus,Chestnut-bellied Malkoha,0.2766
+477.0,480.0,Cinnyris lotenius,Loten's Sunbird,0.1807
+477.0,480.0,Argusianus argus,Great Argus,0.1523
+477.0,480.0,Phylloscopus trochiloides,Greenish Warbler,0.1311
+477.0,480.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1277
+480.0,483.0,Phylloscopus borealis,Arctic Warbler,0.4253
+480.0,483.0,Phylloscopus borealis,Arctic Warbler,0.1517
+483.0,486.0,Cinnyris jugularis,Olive-backed Sunbird,0.2909
+483.0,486.0,Anthreptes malacensis,Brown-throated Sunbird,0.1896
+483.0,486.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1286
+486.0,489.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1443
+489.0,492.0,Anthreptes malacensis,Brown-throated Sunbird,0.6079
+489.0,492.0,Cinnyris jugularis,Olive-backed Sunbird,0.1867
+489.0,492.0,Anthreptes malacensis,Brown-throated Sunbird,0.1665
+492.0,495.0,Anthreptes malacensis,Brown-throated Sunbird,0.6594
+492.0,495.0,Cinnyris jugularis,Olive-backed Sunbird,0.2030
+492.0,495.0,Leptocoma brasiliana,Van Hasselt's Sunbird,0.1217
+492.0,495.0,Anthreptes malacensis,Brown-throated Sunbird,0.1137
+495.0,498.0,Anthreptes malacensis,Brown-throated Sunbird,0.7024
+495.0,498.0,Myiodynastes chrysocephalus,Golden-crowned Flycatcher,0.2239
+495.0,498.0,Psilopogon henricii,Yellow-crowned Barbet,0.1624
+495.0,498.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1009
+498.0,501.0,Aplonis panayensis,Asian Glossy Starling,0.2466
+498.0,501.0,Pycnonotus goiavier,Yellow-vented Bulbul,0.2127
+504.0,507.0,Phaenicophaeus sumatranus,Chestnut-bellied Malkoha,0.1093
+510.0,513.0,Cinnyris jugularis,Olive-backed Sunbird,0.8429
+510.0,513.0,Serinus serinus,European Serin,0.2488
+510.0,513.0,Anthreptes malacensis,Brown-throated Sunbird,0.1852
+516.0,519.0,Psittacula longicauda,Long-tailed Parakeet,0.2171
+516.0,519.0,Psittacula longicauda,Long-tailed Parakeet,0.1447
+516.0,519.0,Aplonis panayensis,Asian Glossy Starling,0.1010
+519.0,522.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.2783
+519.0,522.0,Psilopogon lineatus,Lineated Barbet,0.2378
+519.0,522.0,Aplonis panayensis,Asian Glossy Starling,0.1334
+522.0,525.0,Cinnyris jugularis,Olive-backed Sunbird,0.2675
+522.0,525.0,Cinnyris jugularis,Olive-backed Sunbird,0.1616
+522.0,525.0,Anthreptes malacensis,Brown-throated Sunbird,0.1467
+525.0,528.0,Aplonis panayensis,Asian Glossy Starling,0.7548
+525.0,528.0,Aplonis panayensis,Asian Glossy Starling,0.1934
+525.0,528.0,Psittinus cyanurus,Blue-rumped Parrot,0.1413
+528.0,531.0,Aplonis panayensis,Asian Glossy Starling,0.3352
+528.0,531.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1217
+531.0,534.0,Anthreptes malacensis,Brown-throated Sunbird,0.4207
+531.0,534.0,Cinnyris jugularis,Olive-backed Sunbird,0.3509
+531.0,534.0,Cinnyris jugularis,Olive-backed Sunbird,0.1399
+531.0,534.0,Zosterops auriventer,Hume's White-eye,0.1333
+531.0,534.0,Anthreptes malacensis,Brown-throated Sunbird,0.1289
+534.0,537.0,Cinnyris jugularis,Olive-backed Sunbird,0.2364
+534.0,537.0,Spinus pinus,Pine Siskin,0.1874
+534.0,537.0,Leptocoma calcostetha,Copper-throated Sunbird,0.1536
+534.0,537.0,Serinus serinus,European Serin,0.1224
+534.0,537.0,Anthreptes malacensis,Brown-throated Sunbird,0.1098
+537.0,540.0,Psilopogon lineatus,Lineated Barbet,0.3538
+537.0,540.0,Pomatorhinus horsfieldii,Indian Scimitar-Babbler,0.1475
+540.0,543.0,Trichoglossus haematodus,Coconut Lorikeet,0.6804
+540.0,543.0,Trichoglossus chlorolepidotus,Scaly-breasted Lorikeet,0.4715
+540.0,543.0,Aplonis panayensis,Asian Glossy Starling,0.3729
+543.0,546.0,Trichoglossus chlorolepidotus,Scaly-breasted Lorikeet,0.3198
+543.0,546.0,Trichoglossus haematodus,Coconut Lorikeet,0.1810
+543.0,546.0,Aplonis panayensis,Asian Glossy Starling,0.1597
+549.0,552.0,Pycnonotus plumosus,Olive-winged Bulbul,0.1002
+552.0,555.0,Pernis ptilorhynchus,Crested Honey-buzzard,0.1106
+555.0,558.0,Phylloscopus trochiloides,Greenish Warbler,0.1490
+555.0,558.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1172
+558.0,561.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.3201
+561.0,564.0,Anthreptes malacensis,Brown-throated Sunbird,0.5648
+561.0,564.0,Cinnyris jugularis,Olive-backed Sunbird,0.1683
+561.0,564.0,Leptocoma calcostetha,Copper-throated Sunbird,0.1530
+561.0,564.0,Leptocoma brasiliana,Van Hasselt's Sunbird,0.1475
+561.0,564.0,Spinus pinus,Pine Siskin,0.1266
+564.0,567.0,Spinus pinus,Pine Siskin,0.3476
+564.0,567.0,Cinnyris jugularis,Olive-backed Sunbird,0.3417
+564.0,567.0,Macronus ptilosus,Fluffy-backed Tit-Babbler,0.1472
+567.0,570.0,Spinus pinus,Pine Siskin,0.6200
+573.0,576.0,Spinus pinus,Pine Siskin,0.2480
+576.0,579.0,Psittacula longicauda,Long-tailed Parakeet,0.2188
+576.0,579.0,Porzana porzana,Spotted Crake,0.2119
+576.0,579.0,Amazona autumnalis,Red-lored Parrot,0.2109
+576.0,579.0,Oriolus flavocinctus,Green Oriole,0.1577
+576.0,579.0,Oriolus sagittatus,Olive-backed Oriole,0.1070
+576.0,579.0,Dicrurus paradiseus,Greater Racket-tailed Drongo,0.1055
+579.0,582.0,Picus viridis,Eurasian Green Woodpecker,0.3150
+588.0,591.0,Toxostoma redivivum,California Thrasher,0.2084
+588.0,591.0,Mimus gundlachii,Bahama Mockingbird,0.1335
+594.0,597.0,Psittacula longicauda,Long-tailed Parakeet,0.1521
+594.0,597.0,Dumetella carolinensis,Gray Catbird,0.1414
+597.0,600.0,Hedydipna collaris,Collared Sunbird,0.2480
+597.0,600.0,Cinnyris jugularis,Olive-backed Sunbird,0.1184
+597.0,600.0,Cinnyris jugularis,Olive-backed Sunbird,0.1061

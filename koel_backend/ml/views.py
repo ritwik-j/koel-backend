@@ -45,30 +45,17 @@ class PredictAudioView(APIView):
 
             analyze.main([input_arg, input_path, output_arg, output_path, output_file_arg, output_file_type])
 
-            print("TEMP " + temp_file_path)
-            print("IN " + input_path)
-            print("OUT " + output_path)
-
-            # # print(temp_file_path)
-
-            # # Load from MLconfig and make predictions
-            # predictions = MlConfig.model.predict([temp_file_path])
+            # print("TEMP " + temp_file_path)
+            # print("IN " + input_path)
+            # print("OUT " + output_path)
             
             # Clean up temp folder
             os.remove(temp_file_path)
 
-            # scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions above thresh value
-            # scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
-
-            # # print("nfnrifnri , ", type(scores), scores.columns, scores)
-
-            # # csv code
-            # # csv_file = BytesIO()
-
             # scores_df = pd.DataFrame(scores)
             # scores_df.to_csv('csv_outputs1.csv', sep=',')
 
-            scores = pd.read_csv(r'C:\Users\Nazrul\Documents\bfg_hackathon\koel-backend\koel_backend\PurpleHeron_2.csv')
+            scores = pd.read_csv(output_path)
 
             data = {'scores': scores}
 
