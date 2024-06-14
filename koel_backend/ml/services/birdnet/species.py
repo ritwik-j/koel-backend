@@ -6,9 +6,9 @@ import argparse
 import os
 import sys
 
-import config as cfg
-import model
-import utils
+from ml.services.birdnet import config as cfg
+from ml.services.birdnet import model
+from ml.services.birdnet import utils
 
 
 def getSpeciesList(lat: float, lon: float, week: int, threshold=0.05, sort=False) -> list[str]:

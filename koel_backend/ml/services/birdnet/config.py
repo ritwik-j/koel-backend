@@ -74,8 +74,11 @@ CODES_FILE: str = "eBird_taxonomy_codes_2021E.json"
 SPECIES_LIST_FILE: str = "example/species_list.txt"
 
 # File input path and output path for selection tables
+# INPUT_PATH: str = "example/"
+# OUTPUT_PATH: str = "example/"
 INPUT_PATH: str = "example/"
 OUTPUT_PATH: str = "example/"
+# change here
 
 # Supported file types
 ALLOWED_FILETYPES: list[str] = ["wav", "flac", "mp3", "ogg", "m4a", "wma", "aiff", "aif"]

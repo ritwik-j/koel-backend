@@ -12,11 +12,11 @@ from multiprocessing import Pool, freeze_support
 
 import numpy as np
 
-import audio
-import config as cfg
-import model
-import species
-import utils
+from ml.services.birdnet import audio
+from ml.services.birdnet import config as cfg
+from ml.services.birdnet import model
+from ml.services.birdnet import species
+from ml.services.birdnet import utils
 
 #                    0       1      2           3             4              5               6                7           8             9           10         11
 RTABLE_HEADER = "Selection\tView\tChannel\tBegin Time (s)\tEnd Time (s)\tLow Freq (Hz)\tHigh Freq (Hz)\tCommon Name\tSpecies Code\tConfidence\tBegin Path\tFile Offset (s)\n"
@@ -434,7 +434,7 @@ def analyzeFile(item):
     return True
 
 
-if __name__ == "__main__":
+def main(args):
     # Freeze support for executable
     freeze_support()
 
@@ -527,10 +527,10 @@ if __name__ == "__main__":
         help="Skip files that have already been analyzed. Defaults to False.",
     )
 
-    args = parser.parse_args()
+    args = parser.parse_args(args)
 
     # Set paths relative to script path (requested in #3)
-    script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    script_dir = os.path.dirname(os.path.abspath(sys.argv[0])) + r'\ml\services\birdnet'
     cfg.MODEL_PATH = os.path.join(script_dir, cfg.MODEL_PATH)
     cfg.LABELS_FILE = os.path.join(script_dir, cfg.LABELS_FILE)
     cfg.TRANSLATED_LABELS_PATH = os.path.join(script_dir, cfg.TRANSLATED_LABELS_PATH)
@@ -669,3 +669,7 @@ if __name__ == "__main__":
     # python3 analyze.py --i example/ --o example/ --slist example/ --min_conf 0.5 --threads 4
     # python3 analyze.py --i example/soundscape.wav --o example/soundscape.BirdNET.selection.table.txt --slist example/species_list.txt --threads 8
     # python3 analyze.py --i example/ --o example/ --lat 42.5 --lon -76.45 --week 4 --sensitivity 1.0 --rtype table --locale de
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

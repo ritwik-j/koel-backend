@@ -11,6 +11,7 @@ from django.http import FileResponse
 from .apps import MlConfig
 import pandas as pd
 import os.path
+from ml.services.birdnet import analyze
 
 # Create your views here
 class PredictAudioView(APIView): 
@@ -35,23 +36,39 @@ class PredictAudioView(APIView):
             with open(temp_file_path, 'wb') as f:
                 f.write(audio_file.read())
 
-            # print(temp_file_path)
+            input_arg = '--i'
+            input_path = temp_file_path
+            output_arg = '--o'
+            output_path = os.path.join(os.getcwd(), audio_file.name[:-4] + '.csv')
+            output_file_arg = '--rtype'
+            output_file_type = 'csv' 
 
-            # Load from MLconfig and make predictions
-            predictions = MlConfig.model.predict([temp_file_path])
+            analyze.main([input_arg, input_path, output_arg, output_path, output_file_arg, output_file_type])
+
+            print("TEMP " + temp_file_path)
+            print("IN " + input_path)
+            print("OUT " + output_path)
+
+            # # print(temp_file_path)
+
+            # # Load from MLconfig and make predictions
+            # predictions = MlConfig.model.predict([temp_file_path])
             
             # Clean up temp folder
             os.remove(temp_file_path)
 
-            scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions above thresh value
-            scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
+            # scores = predict_multi_target_labels(predictions, threshold=0.5) # filter predictions above thresh value
+            # scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
 
-            # print("nfnrifnri , ", type(scores), scores.columns, scores)
+            # # print("nfnrifnri , ", type(scores), scores.columns, scores)
 
-            # csv code
-            # csv_file = BytesIO()
-            scores_df = pd.DataFrame(scores)
-            scores_df.to_csv('csv_outputs.csv', sep=',')
+            # # csv code
+            # # csv_file = BytesIO()
+
+            # scores_df = pd.DataFrame(scores)
+            # scores_df.to_csv('csv_outputs1.csv', sep=',')
+
+            scores = pd.read_csv(r'C:\Users\Nazrul\Documents\bfg_hackathon\koel-backend\koel_backend\PurpleHeron_2.csv')
 
             data = {'scores': scores}
 

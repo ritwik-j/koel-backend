@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
-import config as cfg
+from ml.services.birdnet import config as cfg
 
 
 def collect_audio_files(path: str):
