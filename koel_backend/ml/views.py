@@ -12,6 +12,7 @@ from .apps import MlConfig
 import pandas as pd
 import os.path
 from ml.services.birdnet import analyze
+from collections import defaultdict
 
 # Create your views here
 class PredictAudioView(APIView): 
@@ -52,12 +53,59 @@ class PredictAudioView(APIView):
             # Clean up temp folder
             os.remove(temp_file_path)
 
-            # scores_df = pd.DataFrame(scores)
-            # scores_df.to_csv('csv_outputs1.csv', sep=',')
 
-            scores = pd.read_csv(output_path)
+            model_output = pd.read_csv(output_path)   # read model output csv into pd dataframe for processing
+            model_output = model_output.sort_values(by='Confidence', ascending=False).drop_duplicates(subset=['Scientific name', 'Common name', 'Start (s)'])
 
-            data = {'scores': scores}
+            result = {
+                "0": {
+                    "fileName": "Summary",
+                    "Lat": "1.35",
+                    "Long": "103.81",
+                    "animal": {}
+                },
+                "1": {
+                    "fileName": audio_file.name[:-4],
+                    "animal": {}
+                }
+            }
+
+            max_end_time = model_output["End (s)"].max()
+            intervals = range(0, int(max_end_time) + 3, 3)
+
+            for _, row in model_output.iterrows():
+                common_name = row["Common name"]
+                scientific_name = row["Scientific name"]
+                animal_key = f"{common_name}_{scientific_name}"
+
+                if animal_key not in result["1"]["animal"]:
+                    result["1"]["animal"][animal_key] = {str(i // 3): 0 for i in intervals}
+
+                if animal_key not in result["0"]["animal"]:
+                    result["0"]["animal"][animal_key] = {"file": [], "occurrences": [0]}
+
+            for _, row in model_output.iterrows():
+                start, end = row["Start (s)"], row["End (s)"]
+                common_name = row["Common name"]
+                scientific_name = row["Scientific name"]
+                confidence = row["Confidence"]
+                animal_key = f"{common_name}_{scientific_name}"
+
+                for i in range(len(intervals)):
+                    interval_start = intervals[i]
+                    interval_end = intervals[i + 1] if i + 1 < len(intervals) else interval_start + 3
+                    
+                    if start < interval_end and end > interval_start:
+                        result["1"]["animal"][animal_key][str(i)] = confidence
+                        result["0"]["animal"][animal_key]["occurrences"][0] += 1
+
+                        if not result["0"]["animal"][animal_key]["file"]:
+                            result["0"]["animal"][animal_key]["file"] = set(result["0"]["animal"][animal_key]["file"])
+
+                        result["0"]["animal"][animal_key]["file"].add(1)         # for multi-file processing, remove hardcoding
+
+
+            data = {'scores': result}
 
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
