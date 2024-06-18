@@ -327,7 +327,9 @@ def get_result_file_name(fpath: str):
         elif cfg.RESULT_TYPE == "audacity":
             rtype = ".BirdNET.results.txt"
         else:
-            rtype = ".BirdNET.results.csv"
+            # rtype = ".BirdNET.results.csv"
+            rtype = ".csv"
+            
 
         return os.path.join(cfg.OUTPUT_PATH, rpath.rsplit(".", 1)[0] + rtype)
 
