@@ -8,3 +8,5 @@ __pycache__/
 *.png
 
 *.tflite
+
+.DS_Store
