@@ -49,15 +49,15 @@ class PredictAudioView(APIView):
             os.makedirs(os.path.dirname(temp_file_path), exist_ok=True)
             # with open(temp_file_path, 'wb') as f:
             #     f.write(audio_file.read())
-            for x in range(len(audio_file)):
+            for x in range(1, len(audio_file) + 1): # fix here
                 # Handle each file
                 with open(temp_file_path + audio_file[x].name, 'wb+') as destination:
                     for chunk in audio_file[x].chunks():
                         destination.write(chunk)
-                response_data["audioFiles"][x] = {'filename': audio_file[x].name,
+                response_data["audioFiles"][x] = {'filename': audio_file[x].name[:-4],
                                                     'animal': {},
                                                     } # to create dictionary of filenames change this line
-                print("60", audio_file[x].name)
+                print("60", audio_file[x].name[:-4])
 
             '''
             {
@@ -125,8 +125,8 @@ class PredictAudioView(APIView):
                 max_end_time = model_output["End (s)"].max()    # creates interval windows for each file read
                 intervals = range(0, int(max_end_time) + 3, 3)
 
-                response_data["audioFiles"][str(count)] = {"fileName": str(file), "animal": {}}
-                print("128", audio_file[x].name)
+                response_data["audioFiles"][str(count)] = {"fileName": str(file)[:-4], "animal": {}}
+                print("128", str(file)[:-4])
 
                 # print("01")
 
