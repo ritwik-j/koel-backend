@@ -31,7 +31,7 @@ class PredictAudioView(APIView):
 
         audio_file = request.FILES.getlist('audio')  # This is an instance of MIME (in-memory object)
         response_data = {
-            "0" : {
+            "HEADER" : {
                     "fileName": "Summary",
                     "Lat": None,
                     "Long": None,
@@ -51,17 +51,17 @@ class PredictAudioView(APIView):
             #     f.write(audio_file.read())
             for x in range(1, len(audio_file) + 1): # fix here
                 # Handle each file
-                with open(temp_file_path + audio_file[x].name, 'wb+') as destination:
-                    for chunk in audio_file[x].chunks():
+                with open(temp_file_path + audio_file[x-1].name, 'wb+') as destination:
+                    for chunk in audio_file[x-1].chunks():
                         destination.write(chunk)
-                response_data["audioFiles"][x] = {'filename': audio_file[x].name[:-4],
+                response_data["audioFiles"][x] = {'filename': audio_file[x-1].name[:-4],
                                                     'animal': {},
                                                     } # to create dictionary of filenames change this line
-                print("60", audio_file[x].name[:-4])
+                print("60", audio_file[x-1].name[:-4])
 
             '''
             {
-                "0": {
+                "HEADER": {
                     "fileName": "Summary",
                     "Lat": "1.35",
                     "Long": "103.81",
@@ -91,12 +91,6 @@ class PredictAudioView(APIView):
             }
             '''
 
-
-            # # return Response({'status': 'success', 'files': response_data}) # for testing
-            # files_to_predict = glob(temp_file_path + '*')
-            # # Load from MLconfig and make predictions
-            # predictions = MlConfig.model.predict(files_to_predict)
-
             input_arg = '--i'
             input_path = temp_file_path
             output_arg = '--o'
@@ -106,15 +100,6 @@ class PredictAudioView(APIView):
 
             analyze.main([input_arg, input_path, output_arg, output_path, output_file_arg, output_file_type])
 
-            # Clean up temp folder
-            # for f in files_to_predict:
-            #     os.remove(f)
-            # os.rmdir(temp_file_path)
-            # scores = predict_multi_target_labels(predictions, threshold=0.9) # filter predictions above thresh value
-            # scores = scores.loc[:, (scores != 0).any(axis=0)] # discard scores which are 0
-
-            # scores_df = pd.DataFrame(scores)
-            # scores_df.to_csv('csv_outputs.csv', sep=',')
             count = 1
             for file in os.listdir(output_path):
                 model_output = pd.read_csv(output_path + file)   # read model output csv into pd dataframe for processing
@@ -138,8 +123,8 @@ class PredictAudioView(APIView):
                     # loop through results of each file
                     if animal_key not in response_data["audioFiles"][str(count)]["animal"]:
                         response_data["audioFiles"][str(count)]["animal"][animal_key] = {str(i // 3): 0 for i in intervals} # initialize animal detection confidence scores to 0
-                    if animal_key not in response_data["0"]["animal"]:
-                        response_data["0"]["animal"][animal_key] = {"file": set(), "occurrences": [0]}
+                    if animal_key not in response_data["HEADER"]["animal"]:
+                        response_data["HEADER"]["animal"][animal_key] = {"file": set(), "occurrences": [0]}
 
                 # print("02")
 
@@ -157,12 +142,12 @@ class PredictAudioView(APIView):
                         if start < interval_end and end > interval_start:
                             response_data["audioFiles"][str(count)]["animal"][animal_key][str(i)] = confidence
                             # print("02x")
-                            response_data["0"]["animal"][animal_key]["occurrences"][0] += 1
+                            response_data["HEADER"]["animal"][animal_key]["occurrences"][0] += 1
 
                             # print("02a")
 
-                            if count not in response_data["0"]["animal"][animal_key]["file"]:
-                                response_data["0"]["animal"][animal_key]["file"].add(count)         # add file number to "file" : {}
+                            if count not in response_data["HEADER"]["animal"][animal_key]["file"]:
+                                response_data["HEADER"]["animal"][animal_key]["file"].add(count)         # add file number to "file" : {}
 
                             # print("02b")
 
