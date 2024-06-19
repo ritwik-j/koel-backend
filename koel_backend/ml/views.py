@@ -160,7 +160,9 @@ class PredictAudioView(APIView):
             # For old front-end to receive
             data = {'result': response_data}
 
-
+            for f in os.listdir(temp_file_path):
+                os.remove(temp_file_path + '\\' + f)
+            os.rmdir(temp_file_path)
 
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
