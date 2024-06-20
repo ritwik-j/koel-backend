@@ -30,6 +30,8 @@ class PredictAudioView(APIView):
             return Response({'error': 'No audio uploaded'}, status=status.HTTP_400_BAD_REQUEST)
 
         audio_file = request.FILES.getlist('audio')  # This is an instance of MIME (in-memory object)
+        lat = 1.35
+        long = 103.81
         response_data = {
             "HEADER" : {
                     "fileName": "Summary",
@@ -102,20 +104,24 @@ class PredictAudioView(APIView):
 
             count = 0
             duration = 0
+            dataframes = []
+            numSpecies = 0
+
             for file in os.listdir(output_path):
                 model_output = pd.read_csv(output_path + file)   # read model output csv into pd dataframe for processing
                 model_output = model_output.sort_values(by='Confidence', ascending=False).drop_duplicates(subset=['Scientific name', 'Common name', 'Start (s)'])
                 os.remove(output_path + file) # delete old csv
-                updated_csv = model_output.to_csv(output_path + file)
+                model_output.insert(0, 'FileName', file)
+                updated_csv = model_output.to_csv(output_path + file, index=False)
+                dataframes.append(model_output)
 
                 max_end_time = model_output["End (s)"].max()    # creates interval windows for each file read
                 intervals = range(0, int(max_end_time) + 3, 3)
-                print("1a")
-                print(int(max_end_time))
+                # print("1a")
+                # print(int(max_end_time))
                 duration += int(max_end_time)
-                # response_data["audioFiles"][str(count)] = {"fileName": str(file)[:-4], "animal": {}}
 
-                print("01")
+                # print("01")
 
                 for _, row in model_output.iterrows():
                     common_name = row["Common name"]
@@ -123,9 +129,9 @@ class PredictAudioView(APIView):
                     animal_key = f"{common_name}_{scientific_name}"
 
                     # loop through results of each file
-                    print(str(animal_key))
-                    print(str(count))
-                    print(response_data)
+                    # print(str(animal_key))
+                    # print(str(count))
+                    # print(response_data)
                     if str(animal_key) not in response_data["audioFiles"][count]["animal"]:
                         response_data["audioFiles"][count]["animal"][animal_key] = {str(i // 3): 0 for i in intervals} # initialize animal detection confidence scores to 0
                     if animal_key not in response_data["HEADER"]["animal"]:
@@ -156,21 +162,35 @@ class PredictAudioView(APIView):
 
                             # print("02b")
 
+                if numSpecies < len(response_data["HEADER"]["animal"]):
+                    numSpecies = len(response_data["HEADER"]["animal"])
+
                 # print("03")
 
                 count += 1
+
+            aggregated_df = pd.concat(dataframes)
+            aggregated_df.to_csv(output_path + "Results.csv", index=False)
 
             # print("04")
             response_data["HEADER"]["NumFiles"] = count
             m, s = divmod(duration, 60)
             h, m = divmod(m, 60)
             # print("1b")
-            print(h)
-            print(m)
-            print(s)
+            # print(h)
+            # print(m)
+            # print(s)
             total_time = f'{h:d}:{m:02d}:{s:02d}'
-            print(total_time)
+            # print(total_time)
             response_data["HEADER"]["TotalMins"] = total_time
+
+            summary_df = pd.DataFrame(columns=['BatchName', 'NumFiles', 'NumSpeciesDetected', 'TotalMins', 'Lat', 'Long'], 
+                                      data=[['Batch1', count, numSpecies, total_time, lat, long]])
+            summary_df.to_csv(output_path + "Summary.csv", index=False)
+
+            with pd.ExcelWriter('results/output.xlsx') as writer:
+                summary_df.to_excel(writer, sheet_name='Summary', index=False)
+                aggregated_df.to_excel(writer, sheet_name='All Results', index=False)
 
             # For front-end to receive
             data = {'result': response_data}
@@ -201,11 +221,11 @@ class PredictWithCsvView(APIView):
 
         try:
             # Save audio file temporarily
-          os.path.isfile('csv_outputs.csv')
+          os.path.isfile('results/Results.csv')
 
 
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         # return Response(data)
-        return FileResponse(open('csv_outputs.csv', 'rb'), as_attachment=True)
+        return FileResponse(open('results/Results.csv', 'rb'), as_attachment=True)
