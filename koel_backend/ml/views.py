@@ -109,6 +109,7 @@ class PredictAudioView(APIView):
 
             for file in os.listdir(output_path):
                 model_output = pd.read_csv(output_path + file)   # read model output csv into pd dataframe for processing
+                # model_output = pd.read_csv(output_path + file, header=None, encoding='utf-8', sep=',')   # read model output csv into pd dataframe for processing
                 model_output = model_output.sort_values(by='Confidence', ascending=False).drop_duplicates(subset=['Scientific name', 'Common name', 'Start (s)'])
                 os.remove(output_path + file) # delete old csv
                 model_output.insert(0, 'FileName', file)
@@ -188,7 +189,9 @@ class PredictAudioView(APIView):
                                       data=[['Batch1', count, numSpecies, total_time, lat, long]])
             summary_df.to_csv(output_path + "Summary.csv", index=False)
 
-            with pd.ExcelWriter('results/output.xlsx') as writer:
+            if os.path.isfile('output.xlsx'):
+                os.remove('output.xlsx')
+            with pd.ExcelWriter('output.xlsx') as writer:
                 summary_df.to_excel(writer, sheet_name='Summary', index=False)
                 aggregated_df.to_excel(writer, sheet_name='All Results', index=False)
 
@@ -199,9 +202,9 @@ class PredictAudioView(APIView):
             for f in os.listdir(input_path):
                 os.remove(input_path + f)
             os.rmdir(input_path)
-            # for f in os.listdir(output_path):
-            #     os.remove(output_path + f)
-            # os.rmdir(output_path)
+            for f in os.listdir(output_path):
+                os.remove(output_path + f)
+            os.rmdir(output_path)
 
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -221,11 +224,11 @@ class PredictWithCsvView(APIView):
 
         try:
             # Save audio file temporarily
-          os.path.isfile('results/Results.csv')
+          os.path.isfile('output.xlsx')
 
 
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         # return Response(data)
-        return FileResponse(open('results/Results.csv', 'rb'), as_attachment=True)
+        return FileResponse(open('output.xlsx', 'rb'), as_attachment=True)
