@@ -49,17 +49,17 @@ class PredictAudioView(APIView):
             os.makedirs(os.path.dirname(temp_file_path), exist_ok=True)
             # with open(temp_file_path, 'wb') as f:
             #     f.write(audio_file.read())
-            for x in range(1, len(audio_file) + 1): # fix here
+            for x in range(len(audio_file)):
                 # Handle each file
-                with open(temp_file_path + audio_file[x-1].name, 'wb+') as destination:
-                    for chunk in audio_file[x-1].chunks():
+                with open(temp_file_path + audio_file[x].name, 'wb+') as destination:
+                    for chunk in audio_file[x].chunks():
                         destination.write(chunk)
-                response_data["audioFiles"][x] = {'filename': audio_file[x-1].name[:-4],
+                response_data["audioFiles"][x] = {'filename': audio_file[x].name,
                                                     'animal': {},
                                                     } # to create dictionary of filenames change this line
-                print("60", audio_file[x-1].name[:-4])
 
             '''
+            SAMPLE DICTIONARY RESPONSE
             {
                 "HEADER": {
                     "fileName": "Summary",
@@ -94,13 +94,14 @@ class PredictAudioView(APIView):
             input_arg = '--i'
             input_path = temp_file_path
             output_arg = '--o'
-            output_path = results_file_path # os.path.join(os.getcwd(), audio_file[x].name[:-4] + '.csv')
+            output_path = results_file_path
             output_file_arg = '--rtype'
             output_file_type = 'csv'
 
             analyze.main([input_arg, input_path, output_arg, output_path, output_file_arg, output_file_type])
 
-            count = 1
+            count = 0
+            duration = 0
             for file in os.listdir(output_path):
                 model_output = pd.read_csv(output_path + file)   # read model output csv into pd dataframe for processing
                 model_output = model_output.sort_values(by='Confidence', ascending=False).drop_duplicates(subset=['Scientific name', 'Common name', 'Start (s)'])
@@ -109,11 +110,12 @@ class PredictAudioView(APIView):
 
                 max_end_time = model_output["End (s)"].max()    # creates interval windows for each file read
                 intervals = range(0, int(max_end_time) + 3, 3)
+                print("1a")
+                print(int(max_end_time))
+                duration += int(max_end_time)
+                # response_data["audioFiles"][str(count)] = {"fileName": str(file)[:-4], "animal": {}}
 
-                response_data["audioFiles"][str(count)] = {"fileName": str(file)[:-4], "animal": {}}
-                print("128", str(file)[:-4])
-
-                # print("01")
+                print("01")
 
                 for _, row in model_output.iterrows():
                     common_name = row["Common name"]
@@ -121,8 +123,11 @@ class PredictAudioView(APIView):
                     animal_key = f"{common_name}_{scientific_name}"
 
                     # loop through results of each file
-                    if animal_key not in response_data["audioFiles"][str(count)]["animal"]:
-                        response_data["audioFiles"][str(count)]["animal"][animal_key] = {str(i // 3): 0 for i in intervals} # initialize animal detection confidence scores to 0
+                    print(str(animal_key))
+                    print(str(count))
+                    print(response_data)
+                    if str(animal_key) not in response_data["audioFiles"][count]["animal"]:
+                        response_data["audioFiles"][count]["animal"][animal_key] = {str(i // 3): 0 for i in intervals} # initialize animal detection confidence scores to 0
                     if animal_key not in response_data["HEADER"]["animal"]:
                         response_data["HEADER"]["animal"][animal_key] = {"file": set(), "occurrences": [0]}
 
@@ -140,7 +145,7 @@ class PredictAudioView(APIView):
                         interval_end = intervals[i + 1] if i + 1 < len(intervals) else interval_start + 3
 
                         if start < interval_end and end > interval_start:
-                            response_data["audioFiles"][str(count)]["animal"][animal_key][str(i)] = confidence
+                            response_data["audioFiles"][count]["animal"][animal_key][str(i)] = confidence
                             # print("02x")
                             response_data["HEADER"]["animal"][animal_key]["occurrences"][0] += 1
 
@@ -156,13 +161,27 @@ class PredictAudioView(APIView):
                 count += 1
 
             # print("04")
+            response_data["HEADER"]["NumFiles"] = count
+            m, s = divmod(duration, 60)
+            h, m = divmod(m, 60)
+            # print("1b")
+            print(h)
+            print(m)
+            print(s)
+            total_time = f'{h:d}:{m:02d}:{s:02d}'
+            print(total_time)
+            response_data["HEADER"]["TotalMins"] = total_time
 
-            # For old front-end to receive
+            # For front-end to receive
             data = {'result': response_data}
 
-            for f in os.listdir(temp_file_path):
-                os.remove(temp_file_path + '\\' + f)
-            os.rmdir(temp_file_path)
+
+            for f in os.listdir(input_path):
+                os.remove(input_path + f)
+            os.rmdir(input_path)
+            # for f in os.listdir(output_path):
+            #     os.remove(output_path + f)
+            # os.rmdir(output_path)
 
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -182,7 +201,7 @@ class PredictWithCsvView(APIView):
 
         try:
             # Save audio file temporarily
-           os.path.isfile('csv_outputs.csv')
+          os.path.isfile('csv_outputs.csv')
 
 
         except Exception as e:
