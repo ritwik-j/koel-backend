@@ -70,9 +70,9 @@ class PredictAudioView(APIView):
                     "NumFiles": "100",
                     "TotalMins":"532",
                     "animal": {
-                        "Greater Racket-tailed Drongo_Dicrurus paradiseus": { "file": [1], "occurrences": [1] },
-                        "Sunda Scops Owl_Otus lempiji": { "file": [1], "occurrences": [1] },
-                        "Red Junglefowl_Gallus gallus": { "file": [2], "occurrences": [2] },
+                        "Greater Racket-tailed Drongo_Dicrurus paradiseus": { "file": [1], "occurrences": [1], "avgConfidence": [0.68] },
+                        "Sunda Scops Owl_Otus lempiji": { "file": [1], "occurrences": [1], "avgConfidence": [0.75] },
+                        "Red Junglefowl_Gallus gallus": { "file": [2], "occurrences": [2], "avgConfidence": [0.48] },
                     }
                 },
                 "audioFiles": {
@@ -136,7 +136,7 @@ class PredictAudioView(APIView):
                     if str(animal_key) not in response_data["audioFiles"][count]["animal"]:
                         response_data["audioFiles"][count]["animal"][animal_key] = {str(i // 3): 0 for i in intervals} # initialize animal detection confidence scores to 0
                     if animal_key not in response_data["HEADER"]["animal"]:
-                        response_data["HEADER"]["animal"][animal_key] = {"file": set(), "occurrences": [0]}
+                        response_data["HEADER"]["animal"][animal_key] = {"file": set(), "occurrences": [0], "avgConfidence": [0]}
 
                 # print("02")
 
@@ -172,6 +172,16 @@ class PredictAudioView(APIView):
 
             aggregated_df = pd.concat(dataframes)
             aggregated_df.to_csv(output_path + "Results.csv", index=False)
+
+
+            average_confidences_series = aggregated_df.groupby(['Scientific name', 'Common name'])['Confidence'].mean()
+            average_confidences_df = average_confidences_series.reset_index()
+            for _, row in average_confidences_df.iterrows():
+                common_name = row["Common name"]
+                scientific_name = row["Scientific name"]
+                avgConfidence = row["Confidence"]
+                animal_key = f"{common_name}_{scientific_name}"
+                response_data["HEADER"]["animal"][animal_key]["avgConfidence"][0] = avgConfidence
 
             # print("04")
             response_data["HEADER"]["NumFiles"] = count
