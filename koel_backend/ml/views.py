@@ -70,9 +70,9 @@ class PredictAudioView(APIView):
                     "NumFiles": "100",
                     "TotalMins":"532",
                     "animal": {
-                        "Greater Racket-tailed Drongo_Dicrurus paradiseus": { "file": [1], "occurrences": [1], "avgConfidence": [0.68] },
-                        "Sunda Scops Owl_Otus lempiji": { "file": [1], "occurrences": [1], "avgConfidence": [0.75] },
-                        "Red Junglefowl_Gallus gallus": { "file": [2], "occurrences": [2], "avgConfidence": [0.48] },
+                        "Greater Racket-tailed Drongo_Dicrurus paradiseus": { "file": [1], "occurrences": [1], "avgConfidence": [0.68], "minConfidence": [0.68], "maxConfidence": [0.68] },
+                        "Sunda Scops Owl_Otus lempiji": { "file": [1], "occurrences": [1], "avgConfidence": [0.75], "minConfidence": [0.68], "maxConfidence": [0.68] },
+                        "Red Junglefowl_Gallus gallus": { "file": [2], "occurrences": [2], "avgConfidence": [0.48], "minConfidence": [0.68], "maxConfidence": [0.68] },
                     }
                 },
                 "audioFiles": {
@@ -136,7 +136,7 @@ class PredictAudioView(APIView):
                     if str(animal_key) not in response_data["audioFiles"][count]["animal"]:
                         response_data["audioFiles"][count]["animal"][animal_key] = {str(i // 3): 0 for i in intervals} # initialize animal detection confidence scores to 0
                     if animal_key not in response_data["HEADER"]["animal"]:
-                        response_data["HEADER"]["animal"][animal_key] = {"file": set(), "occurrences": [0], "avgConfidence": [0]}
+                        response_data["HEADER"]["animal"][animal_key] = {"file": set(), "occurrences": [0], "avgConfidence": [0], "minConfidence": [0], "maxConfidence": [0]}
 
                 # print("02")
 
@@ -182,6 +182,24 @@ class PredictAudioView(APIView):
                 avgConfidence = row["Confidence"]
                 animal_key = f"{common_name}_{scientific_name}"
                 response_data["HEADER"]["animal"][animal_key]["avgConfidence"][0] = avgConfidence
+
+            min_confidences_series = aggregated_df.groupby(['Scientific name', 'Common name'])['Confidence'].min()
+            min_confidences_df = min_confidences_series.reset_index()
+            for _, row in min_confidences_df.iterrows():
+                common_name = row["Common name"]
+                scientific_name = row["Scientific name"]
+                minConfidence = row["Confidence"]
+                animal_key = f"{common_name}_{scientific_name}"
+                response_data["HEADER"]["animal"][animal_key]["minConfidence"][0] = minConfidence
+
+            max_confidences_series = aggregated_df.groupby(['Scientific name', 'Common name'])['Confidence'].max()
+            max_confidences_df = max_confidences_series.reset_index()
+            for _, row in max_confidences_df.iterrows():
+                common_name = row["Common name"]
+                scientific_name = row["Scientific name"]
+                maxConfidence = row["Confidence"]
+                animal_key = f"{common_name}_{scientific_name}"
+                response_data["HEADER"]["animal"][animal_key]["maxConfidence"][0] = maxConfidence
 
             # print("04")
             response_data["HEADER"]["NumFiles"] = count
